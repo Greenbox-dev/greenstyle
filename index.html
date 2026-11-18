@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#174f37">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="icon" type="image/png" href="logo-meu-financeiro.png">
+  <title>Meu Financeiro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="#" data-page-link="inicio">
+      <img class="brand-logo" src="logo-meu-financeiro.png" alt="Logo Meu Financeiro">
+      <span class="brand-name">Meu Financeiro<span>suas finanças em equilíbrio</span></span>
+    </a>
+    <div class="top-actions">
+      <button class="round-action" id="exportar" title="Exportar dados" aria-label="Exportar dados"><i data-lucide="download"></i></button>
+      <button class="round-action" id="notificacoes" title="Notificações" aria-label="Notificações"><i data-lucide="bell"></i></button>
+      <button class="avatar" id="perfil" aria-label="Perfil"><i data-lucide="user-round"></i></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- INÍCIO -->
+    <section class="page active" id="page-inicio" data-page="inicio">
+      <div class="intro">
+        <div><p class="kicker">PAINEL FINANCEIRO</p><h1>Olá! Vamos cuidar<br class="desktop-break"> do seu dinheiro.</h1><p class="subheading">Acompanhe suas finanças em um só lugar.</p></div>
+        <div class="today"><i data-lucide="calendar-days"></i><span id="data-hoje"></span></div>
+      </div>
+
+      <section class="hero-wallet">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="wallet-head"><span class="wallet-label"><i data-lucide="wallet"></i> Saldo total</span><span class="balance-tag">ATUALIZADO</span></div>
+        <div class="balance-line"><h2 id="saldo">R$ 0,00</h2></div>
+        <p class="updated">Entradas menos despesas</p>
+        <div class="wallet-actions">
+          <button class="wallet-action" data-go="adicionar" data-type="entrada"><span><i data-lucide="arrow-down-left"></i></span><small>Adicionar<br>entrada</small></button>
+          <button class="wallet-action" data-go="adicionar" data-type="despesa"><span><i data-lucide="arrow-up-right"></i></span><small>Adicionar<br>despesa</small></button>
+          <button class="wallet-action" data-go="analises"><span><i data-lucide="chart-no-axes-column-increasing"></i></span><small>Ver<br>análises</small></button>
+          <button class="wallet-action" id="atalho-exportar"><span><i data-lucide="file-down"></i></span><small>Exportar<br>dados</small></button>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <article class="metric-card"><div class="metric-top"><span class="metric-icon green"><i data-lucide="arrow-down-left"></i></span><span class="metric-caption">ENTRADAS</span></div><strong id="entradas">R$ 0,00</strong><small>Dinheiro recebido</small></article>
+        <article class="metric-card"><div class="metric-top"><span class="metric-icon coral"><i data-lucide="arrow-up-right"></i></span><span class="metric-caption">DESPESAS</span></div><strong id="despesas">R$ 0,00</strong><small>Dinheiro utilizado</small></article>
+        <article class="metric-card"><div class="metric-top"><span class="metric-icon lime"><i data-lucide="piggy-bank"></i></span><span class="metric-caption">ECONOMIA</span></div><strong id="economia">0%</strong><small>Das entradas mantidas</small></article>
+      </section>
+
+      <section class="surface home-lower">
+        <div class="section-title"><div><p class="kicker">ACOMPANHAMENTO</p><h2>Movimentações recentes</h2></div><button class="text-button" data-go="historico">Ver todas <i data-lucide="arrow-up-right"></i></button></div>
+        <div id="recentes" class="transaction-list"></div>
+      </section>
+    </section>
+
+    <!-- ANÁLISES -->
+    <section class="page" id="page-analises" data-page="analises">
+      <div class="page-heading"><p class="kicker">VISÃO INTELIGENTE</p><h1>Análises</h1><p class="subheading">Entenda para onde seu dinheiro está indo.</p></div>
+      <section class="surface analytics-surface">
+        <div class="section-title"><div><p class="kicker">RESUMO DO PERÍODO</p><h2>Fluxo financeiro</h2></div><span class="section-symbol"><i data-lucide="chart-no-axes-combined"></i></span></div>
+        <div class="switcher"><button class="switch active" data-chart="entrada">Entradas</button><button class="switch" data-chart="despesa">Despesas</button></div>
+        <div class="chart-summary"><span id="chart-label">Total de entradas</span><strong id="chart-total">R$ 0,00</strong></div>
+        <div class="chart"><div class="chart-grid"><span></span><span></span><span></span><span></span></div><div class="chart-bars" id="chart-bars"></div></div>
+        <div class="chart-foot"><span><i class="legend-dot"></i><span id="legend-label">Entradas por mês</span></span><span>Últimos 6 meses</span></div>
+      </section>
+      <section class="metrics analysis-metrics">
+        <article class="metric-card"><div class="metric-top"><span class="metric-icon green"><i data-lucide="arrow-down-left"></i></span><span class="metric-caption">ENTRADAS</span></div><strong id="analysis-entradas">R$ 0,00</strong><small>Total registrado</small></article>
+        <article class="metric-card"><div class="metric-top"><span class="metric-icon coral"><i data-lucide="arrow-up-right"></i></span><span class="metric-caption">DESPESAS</span></div><strong id="analysis-despesas">R$ 0,00</strong><small>Total registrado</small></article>
+      </section>
+    </section>
+
+    <!-- ADICIONAR -->
+    <section class="page" id="page-adicionar" data-page="adicionar">
+      <div class="page-heading"><p class="kicker">NOVA MOVIMENTAÇÃO</p><h1>Adicionar lançamento</h1><p class="subheading">Registre uma entrada ou uma despesa.</p></div>
+      <section class="surface form-surface">
+        <div class="section-title"><div><p class="kicker">DETALHES</p><h2>Informações do lançamento</h2></div><span class="section-symbol"><i data-lucide="plus"></i></span></div>
+        <form id="form-transacao">
+          <label>Descrição<input id="descricao" type="text" placeholder="Ex.: Compras do mês" maxlength="70" required></label>
+          <div class="two-fields"><label>Valor (R$)<input id="valor" type="number" min="0.01" step="0.01" placeholder="0,00" required></label><label>Tipo<select id="tipo"><option value="despesa">Despesa</option><option value="entrada">Entrada</option></select></label></div>
+          <div class="two-fields"><label>Categoria<select id="categoria"><option>Alimentação</option><option>Transporte</option><option>Moradia</option><option>Saúde</option><option>Educação</option><option>Lazer</option><option>Salário</option><option>Compras</option><option>Assinaturas</option><option>Outros</option></select></label><label>Data<input id="data" type="date" required></label></div>
+          <button class="submit-button" type="submit"><i data-lucide="check-circle-2"></i> Salvar lançamento</button>
+        </form>
+      </section>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section class="page" id="page-historico" data-page="historico">
+      <div class="page-heading"><p class="kicker">SUAS ATIVIDADES</p><h1>Histórico</h1><p class="subheading">Consulte e organize suas movimentações.</p></div>
+      <section class="surface">
+        <div class="section-title history-title"><div><p class="kicker">TODOS OS REGISTROS</p><h2>Movimentações</h2></div><select id="filtro" class="filter"><option value="todos">Todas</option><option value="entrada">Entradas</option><option value="despesa">Despesas</option></select></div>
+        <div id="lista-transacoes" class="transaction-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navegação principal">
+    <button class="nav-link selected" data-page-target="inicio"><i data-lucide="house"></i><span>Início</span></button>
+    <button class="nav-link" data-page-target="analises"><i data-lucide="chart-no-axes-column-increasing"></i><span>Análises</span></button>
+    <button class="nav-link" data-page-target="adicionar"><i data-lucide="plus-square"></i><span>Adicionar</span></button>
+    <button class="nav-link" data-page-target="historico"><i data-lucide="receipt-text"></i><span>Histórico</span></button>
+  </nav>
+</div>
+</body>
+</html>

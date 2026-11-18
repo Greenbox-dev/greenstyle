@@ -1,0 +1,17 @@
+MEU FINANCEIRO — VERSÃO FORMATO CELULAR
+
+ARQUIVOS
+- index.html: estrutura do aplicativo
+- style.css: aparência e adaptação de tela
+- script.js: funcionalidades
+- logo-meu-financeiro.png: logotipo criado para o projeto
+
+COMO ABRIR
+1. Extraia todos os arquivos para a mesma pasta.
+2. Abra a pasta no Visual Studio Code.
+3. Abra index.html no navegador (ou use a extensão Live Server).
+
+A INTERFACE MANTÉM O FORMATO DE SMARTPHONE NO COMPUTADOR E NO CELULAR.
+Os lançamentos continuam salvos no armazenamento local do navegador, usando a chave greenFinanceItems da versão anterior.
+
+A biblioteca Lucide e a fonte DM Sans são carregadas pela internet.
