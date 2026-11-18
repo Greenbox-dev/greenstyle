@@ -100,6 +100,17 @@
         <div id="lista-transacoes" class="transaction-list"></div>
       </section>
     </section>
+
+    <!-- DESEJOS -->
+    <section class="page" id="page-desejos" data-page="desejos">
+      <div class="page-heading"><p class="kicker">PLANOS E VONTADES</p><h1>Minha lista de desejos</h1><p class="subheading">Guarde aqui o que você quer conquistar.</p></div>
+      <section class="wish-summary"><span class="wish-summary-icon"><i data-lucide="heart"></i></span><div><small>VALOR DOS DESEJOS PENDENTES</small><strong id="wish-total">R$ 0,00</strong><span id="wish-count">0 desejos pendentes</span></div></section>
+      <section class="surface wish-form-surface"><div class="section-title"><div><p class="kicker">NOVO DESEJO</p><h2>O que você quer conquistar?</h2></div><span class="section-symbol"><i data-lucide="gift"></i></span></div>
+        <form id="form-desejo"><label>Nome do desejo<input id="desejo-nome" type="text" maxlength="70" placeholder="Ex.: Um fone novo" required></label>
+          <div class="two-fields"><label>Valor estimado (R$)<input id="desejo-valor" type="number" min="0.01" step="0.01" placeholder="0,00" required></label><label>Prioridade<select id="desejo-prioridade"><option value="Baixa">Baixa</option><option value="Média" selected>Média</option><option value="Alta">Alta</option></select></label></div>
+          <button class="submit-button" type="submit"><i data-lucide="plus"></i> Adicionar desejo</button></form></section>
+      <section class="surface wish-list-surface"><div class="section-title"><div><p class="kicker">SUA LISTA</p><h2>Desejos salvos</h2></div><span class="wish-list-count" id="wish-list-count">0 itens</span></div><div id="lista-desejos" class="wish-list"></div></section>
+    </section>
   </main>
 
   <nav class="bottom-nav" aria-label="Navegação principal">
@@ -107,6 +118,7 @@
     <button class="nav-link" data-page-target="analises"><i data-lucide="chart-no-axes-column-increasing"></i><span>Análises</span></button>
     <button class="nav-link" data-page-target="adicionar"><i data-lucide="plus-square"></i><span>Adicionar</span></button>
     <button class="nav-link" data-page-target="historico"><i data-lucide="receipt-text"></i><span>Histórico</span></button>
+    <button class="nav-link" data-page-target="desejos"><i data-lucide="heart"></i><span>Desejos</span></button>
   </nav>
 </div>
 </body>
