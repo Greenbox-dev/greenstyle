@@ -6,7 +6,9 @@
   <meta name="theme-color" content="#174f37">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="icon" type="image/png" href="logo-meu-financeiro.png">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
   <title>Meu Financeiro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +25,7 @@
       <span class="brand-name">Meu Financeiro<span>suas finanças em equilíbrio</span></span>
     </a>
     <div class="top-actions">
+      <button class="round-action install-app" id="instalar-app" title="Instalar aplicativo" aria-label="Instalar aplicativo" hidden><i data-lucide="download"></i></button>
       <button class="round-action" id="exportar" title="Exportar dados" aria-label="Exportar dados"><i data-lucide="download"></i></button>
       <button class="round-action" id="notificacoes" title="Notificações" aria-label="Notificações"><i data-lucide="bell"></i></button>
       <button class="avatar" id="perfil" aria-label="Perfil"><i data-lucide="user-round"></i></button>
