@@ -199,3 +199,16 @@ main::-webkit-scrollbar{display:none}
  main{padding-left:14px;padding-right:14px}.hero-wallet{padding:19px}.surface{padding:15px}
  .today{font-size:9px}.two-fields{gap:8px}.nav-link span{font-size:8px}
 }
+
+
+/* Aba de desejos */
+.wish-summary{display:flex;align-items:center;gap:15px;padding:19px;border-radius:20px;background:linear-gradient(115deg,#174f37,#126052);color:#fff;margin-bottom:15px;box-shadow:0 12px 25px rgba(23,79,55,.13)}
+.wish-summary-icon{width:45px;height:45px;flex:0 0 45px;border-radius:15px;background:rgba(255,255,255,.14);display:grid;place-items:center;color:#f3cf55}.wish-summary-icon svg{width:23px;height:23px}
+.wish-summary div{display:grid;gap:3px}.wish-summary small{font-size:8px;letter-spacing:1px;color:#c9dfd0;font-weight:800}.wish-summary strong{font-size:25px;letter-spacing:-.6px}.wish-summary div span{font-size:10px;color:#d5e6d9}
+.wish-form-surface{margin-bottom:15px}.wish-list-count{font-size:9px;color:#819087;background:#f0f5ef;padding:7px 10px;border-radius:20px}.wish-list{display:grid}
+.wish-card{display:flex;align-items:center;gap:11px;padding:13px 0;border-top:1px solid #edf1eb}.wish-card:first-child{border-top:0}
+.wish-icon{width:40px;height:40px;flex:0 0 40px;border-radius:13px;background:#e7f2e9;color:#287b50;display:grid;place-items:center}.wish-icon svg{width:19px;height:19px}
+.wish-info{display:grid;gap:3px;min-width:0;flex:1}.wish-info strong{font-size:12px;overflow-wrap:anywhere}.wish-info span{font-size:10px;color:#69786e}.wish-info small{font-size:9px;color:#9aa59c}
+.wish-actions{display:flex;gap:5px}.wish-actions button{width:31px;height:31px;border:0;border-radius:10px;display:grid;place-items:center;background:#edf5ed;color:#287b50}.wish-actions button svg{width:15px;height:15px}.wish-actions .wish-remove{background:#fff0ee;color:#d8756b}
+.wish-done .wish-icon{background:#f0f2ed;color:#849087}.wish-done .wish-info strong{text-decoration:line-through;color:#89948b}.wish-done .wish-info small{color:#278451}
+@media(max-width:380px){.wish-summary{padding:16px}.wish-info strong{font-size:11px}.wish-actions{gap:3px}.wish-actions button{width:28px;height:28px}}
