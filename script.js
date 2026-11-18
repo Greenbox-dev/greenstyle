@@ -106,7 +106,7 @@ function exportCSV(){
 $("exportar").addEventListener("click",exportCSV);$("atalho-exportar").addEventListener("click",exportCSV);
 $("notificacoes").addEventListener("click",()=>alert("Você está em dia! Continue registrando suas movimentações."));
 $("perfil").addEventListener("click",()=>alert("Área de perfil: em uma próxima etapa podemos adicionar suas preferências."));
-update();renderWishes();showPage("inicio");lucide.createIcons();
+update();showPage("inicio");lucide.createIcons();
 
 /* Lista de desejos */
 let wishes=[];
@@ -131,3 +131,30 @@ function renderWishes(){
 }
 $("form-desejo").addEventListener("submit",e=>{e.preventDefault();const name=$("desejo-nome").value.trim(),value=Number($("desejo-valor").value),priority=$("desejo-prioridade").value;if(!name||!Number.isFinite(value)||value<=0){alert("Informe um nome e um valor válido.");return;}wishes.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,value,priority,done:false,createdAt:Date.now()});persistWishes();e.target.reset();$("desejo-prioridade").value="Média";renderWishes();});
 
+
+/* Registro do Service Worker PWA */
+let deferredInstallPrompt=null;
+const installButton=$("instalar-app");
+window.addEventListener("beforeinstallprompt",event=>{
+  event.preventDefault();
+  deferredInstallPrompt=event;
+  if(installButton){installButton.hidden=false;lucide.createIcons();}
+});
+if(installButton){
+  installButton.addEventListener("click",async()=>{
+    if(!deferredInstallPrompt)return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt=null;
+    installButton.hidden=true;
+  });
+}
+window.addEventListener("appinstalled",()=>{
+  deferredInstallPrompt=null;
+  if(installButton)installButton.hidden=true;
+});
+if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost" || location.hostname==="127.0.0.1")){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(error=>console.error("Falha ao registrar o Service Worker:",error)));
+}
+/* Inicializa a lista de desejos depois de declarar seus dados */
+renderWishes();
