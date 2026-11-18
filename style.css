@@ -212,3 +212,7 @@ main::-webkit-scrollbar{display:none}
 .wish-actions{display:flex;gap:5px}.wish-actions button{width:31px;height:31px;border:0;border-radius:10px;display:grid;place-items:center;background:#edf5ed;color:#287b50}.wish-actions button svg{width:15px;height:15px}.wish-actions .wish-remove{background:#fff0ee;color:#d8756b}
 .wish-done .wish-icon{background:#f0f2ed;color:#849087}.wish-done .wish-info strong{text-decoration:line-through;color:#89948b}.wish-done .wish-info small{color:#278451}
 @media(max-width:380px){.wish-summary{padding:16px}.wish-info strong{font-size:11px}.wish-actions{gap:3px}.wish-actions button{width:28px;height:28px}}
+
+/* Instalação PWA */
+.install-app[hidden]{display:none}
+.install-app{background:#e8f3e9;color:var(--forest)}
