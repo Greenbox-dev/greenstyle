@@ -106,4 +106,28 @@ function exportCSV(){
 $("exportar").addEventListener("click",exportCSV);$("atalho-exportar").addEventListener("click",exportCSV);
 $("notificacoes").addEventListener("click",()=>alert("Você está em dia! Continue registrando suas movimentações."));
 $("perfil").addEventListener("click",()=>alert("Área de perfil: em uma próxima etapa podemos adicionar suas preferências."));
-update();showPage("inicio");lucide.createIcons();
+update();renderWishes();showPage("inicio");lucide.createIcons();
+
+/* Lista de desejos */
+let wishes=[];
+try{wishes=JSON.parse(localStorage.getItem("greenFinanceWishes")||"[]");}catch{wishes=[];}
+function persistWishes(){localStorage.setItem("greenFinanceWishes",JSON.stringify(wishes));}
+function renderWishes(){
+ const list=$("lista-desejos");if(!list)return;list.replaceChildren();
+ const pending=wishes.filter(w=>!w.done);
+ $("wish-total").textContent=money(pending.reduce((s,w)=>s+w.value,0));
+ $("wish-count").textContent=`${pending.length} ${pending.length===1?"desejo pendente":"desejos pendentes"}`;
+ $("wish-list-count").textContent=`${wishes.length} ${wishes.length===1?"item":"itens"}`;
+ if(!wishes.length){const empty=document.createElement("div");empty.className="empty-state";const icon=document.createElement("i");icon.setAttribute("data-lucide","heart");const title=document.createElement("strong");title.textContent="Sua lista ainda está vazia";const desc=document.createElement("span");desc.textContent="Adicione algo que você gostaria de conquistar.";empty.append(icon,title,desc);list.appendChild(empty);lucide.createIcons();return;}
+ [...wishes].sort((a,b)=>Number(a.done)-Number(b.done)||b.createdAt-a.createdAt).forEach(w=>{
+  const card=document.createElement("article");card.className="wish-card"+(w.done?" wish-done":"");
+  const symbol=document.createElement("span");symbol.className="wish-icon";const glyph=document.createElement("i");glyph.setAttribute("data-lucide",w.done?"check":"gift");symbol.appendChild(glyph);
+  const info=document.createElement("div");info.className="wish-info";const title=document.createElement("strong");title.textContent=w.name;const meta=document.createElement("span");meta.textContent=money(w.value)+" · Prioridade "+w.priority;const state=document.createElement("small");state.textContent=w.done?"Conquistado":"Na sua lista";info.append(title,meta,state);
+  const actions=document.createElement("div");actions.className="wish-actions";
+  const done=document.createElement("button");done.type="button";done.className="wish-complete";done.title=w.done?"Marcar como pendente":"Marcar como conquistado";done.setAttribute("aria-label",done.title);const di=document.createElement("i");di.setAttribute("data-lucide",w.done?"rotate-ccw":"check");done.appendChild(di);done.addEventListener("click",()=>{w.done=!w.done;persistWishes();renderWishes();});
+  const remove=document.createElement("button");remove.type="button";remove.className="wish-remove";remove.title="Excluir desejo";remove.setAttribute("aria-label","Excluir desejo");const ri=document.createElement("i");ri.setAttribute("data-lucide","trash-2");remove.appendChild(ri);remove.addEventListener("click",()=>{if(confirm(`Remover "${w.name}" da lista?`)){wishes=wishes.filter(x=>x.id!==w.id);persistWishes();renderWishes();}});
+  actions.append(done,remove);card.append(symbol,info,actions);list.appendChild(card);
+ });lucide.createIcons();
+}
+$("form-desejo").addEventListener("submit",e=>{e.preventDefault();const name=$("desejo-nome").value.trim(),value=Number($("desejo-valor").value),priority=$("desejo-prioridade").value;if(!name||!Number.isFinite(value)||value<=0){alert("Informe um nome e um valor válido.");return;}wishes.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,value,priority,done:false,createdAt:Date.now()});persistWishes();e.target.reset();$("desejo-prioridade").value="Média";renderWishes();});
+
